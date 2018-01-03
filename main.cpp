@@ -12,9 +12,10 @@ int main(int argc, char **argv) {
     strcpy(filepath, getFilePath(argc, argv));
     char *defs[argc];
     getDefinitions(argc, argv, defs);
-    Template tmp = NewTemplate(filepath);
+    Template tmp = Template(std::string("name"),std::string(filepath));
 
-    printf("%s\n", tmp.filepath);
+    printf("%s\n", tmp.getFilepath().c_str());
+    printf("%s\n", tmp.getName().c_str());
     printf("%s\n", defs[0]);
     printf("%s\n", defs[1]);
 
@@ -41,7 +42,7 @@ void getDefinitions(int argc, char **argv, char **defs) {
         if(strcmp(argv[i], "-d") == 0) {
             if((argc - 1) > i) {
                 printf("%d", count);
-                defs[count] = malloc(sizeof argv[i+1]);
+                defs[count] = (char*)malloc(sizeof argv[i+1]);
                 strcpy (defs[count], argv[i+1]);
                 count++;
             }

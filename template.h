@@ -1,10 +1,17 @@
 #ifndef TEMPLATE_H_ 
 #define TEMPLATE_H_
 
-typedef struct Template {
-    char name[255];
-    char filepath[4096];
-} Template;
+#include <string>
+
+class Template {
+    private:
+        std::string name;
+        std::string filepath;
+    public:
+        Template(std::string name, std::string filepath);
+        std::string getFilepath();
+        std::string getName();
+};
 
 Template NewTemplate(char filepath[]);
 
