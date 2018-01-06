@@ -8,5 +8,11 @@
 #include "template.h"
 
 TEST_CASE("Test Template Generate", "[templateGenerate]") {
- 	REQUIRE(false);   
+	std::string subject = "a {{ item }} sentence";
+   
+  	Template tmp = Template(subject);
+
+	tmp.setValue("item", "test");
+	
+ 	REQUIRE(tmp.generateTemplate("a test sentence") == 0);   
 };
