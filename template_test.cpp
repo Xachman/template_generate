@@ -14,5 +14,5 @@ TEST_CASE("Test Template Generate", "[templateGenerate]") {
 
 	tmp.setValue("item", "test");
 	
- 	REQUIRE(tmp.generateTemplate("a test sentence") == 0);   
+ 	REQUIRE(tmp.generateTemplate().compare("a test sentence") == 0);   
 };
