@@ -11,7 +11,7 @@ template:
 clean:
 	rm ./*.o
 
-test:
+tests:
 	$(CC) main_test_file.o template.cpp ./*_test.cpp -o tests.exe; ./tests.exe;	
 
 main_test:
