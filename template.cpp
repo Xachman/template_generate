@@ -18,14 +18,13 @@ std::string Template::getName() {
 
 std::string Template::generateTemplate() {
 	this->processTemplate();
+	std::cout << this->subject <<  std::endl;
     return this->subject;
 }
 void Template::processTemplate() {
     std::istringstream ss(this->subject);
     std::string line;    
-    while (std::getline(ss, line)) {
-		this->processLine(line);
-    }
+	this->processLine(this->subject);
 }
 void Template::processLine(std::string line) {
 	int count = 0;
