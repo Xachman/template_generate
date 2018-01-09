@@ -18,7 +18,6 @@ std::string Template::getName() {
 
 std::string Template::generateTemplate() {
 	this->processTemplate();
-	std::cout << this->subject << std::endl;
     return this->subject;
 }
 void Template::processTemplate() {
@@ -41,13 +40,9 @@ void Template::processLine(std::string line) {
 		}
 		if(isCollecting) {
 			if(this->isCloseSep(line[count], line[count+1])) {
-				end = count;	
+				end = count+2;	
 				std::string replace =  this->items[current];
-				std::cout << count << std::endl;
-				std::cout << replace << std::endl;
-				std::cout << current << std::endl;
-				this->subject.replace(start, end, replace);
-				std::cout << this->subject << std::endl;
+				this->subject.replace(start, end - start, replace);
 				isCollecting = false;
 				return this->processTemplate();
 			}
