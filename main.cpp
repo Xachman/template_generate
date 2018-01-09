@@ -1,51 +1,23 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include "cxxops.hpp"
 #include "template.h"
 
 char* getFilePath(int argc, char **argv);
 void getDefinitions(int argc, char **argv, char **defs);
 
 int main(int argc, char **argv) {
-    char filepath[4096];
-    strcpy(filepath, getFilePath(argc, argv));
-    char *defs[argc];
-    getDefinitions(argc, argv, defs);
-    Template tmp = Template(std::string("name"),std::string(filepath));
 
-    printf("%s\n", tmp.getFilepath().c_str());
-    printf("%s\n", tmp.getName().c_str());
-    printf("%s\n", defs[0]);
-    printf("%s\n", defs[1]);
+	cxxopts::Options options("Template Parse", "Parse Templates using mustache like syntax");
+	options.add_options()
+	  ("d,debug", "Enable debugging")
+	  ("f,file", "File name", cxxopts::value<std::string>())
+	  ;
+	auto result = options.parse(argc, argv);
+
+	std::string file = result["f"].as<std::string>();
+	std::cout << file << std::endl;
 
     return 0;
-}
-
-char* getFilePath(int argc, char **argv) {
-    for( int i=0; i < argc; i++) {
-        if(strcmp(argv[i], "-f") == 0) {
-            if((argc - 1) > i) {
-                return argv[i+1];
-            }
-            printf("%s\n", "No file path in arguments");
-            exit(1);
-        }
-    }
-}
-
-void getDefinitions(int argc, char **argv, char **defs) {
-    int count = 0;
-    
-    printf("%d", sizeof(defs));
-    for( int i=0; i < argc; i++) {
-        if(strcmp(argv[i], "-d") == 0) {
-            if((argc - 1) > i) {
-                printf("%d", count);
-                defs[count] = (char*)malloc(sizeof argv[i+1]);
-                strcpy (defs[count], argv[i+1]);
-                count++;
-            }
-        }
-    }
 }
