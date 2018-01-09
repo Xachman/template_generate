@@ -14,6 +14,7 @@ class Template {
 		bool isOpenSep(const char &char1, const char &char2);
 		bool isCloseSep(const char &char1, const char &char2);
 		void processLine(std::string line);
+		void processTemplate();
     public:
         Template(std::string name, std::string filepath);
         Template(const std::string &subject);

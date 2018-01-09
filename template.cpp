@@ -17,15 +17,20 @@ std::string Template::getName() {
 }
 
 std::string Template::generateTemplate() {
+	this->processTemplate();
+	std::cout << this->subject << std::endl;
+    return this->subject;
+}
+void Template::processTemplate() {
     std::istringstream ss(this->subject);
     std::string line;    
     while (std::getline(ss, line)) {
 		this->processLine(line);
     }
-    return this->subject;
 }
 void Template::processLine(std::string line) {
 	int count = 0;
+	std::string current;
 	bool isCollecting = false;
 	int start = 0;
 	int end = 0;
@@ -37,11 +42,17 @@ void Template::processLine(std::string line) {
 		if(isCollecting) {
 			if(this->isCloseSep(line[count], line[count+1])) {
 				end = count;	
-				this->subject.replace(start, end, this->items[this->current]);
+				std::string replace =  this->items[current];
+				std::cout << count << std::endl;
+				std::cout << replace << std::endl;
+				std::cout << current << std::endl;
+				this->subject.replace(start, end, replace);
+				std::cout << this->subject << std::endl;
 				isCollecting = false;
+				return this->processTemplate();
 			}
 			if(c != ' ' && count > start+1) {	
-				this->current += c;	
+				current += c;	
 			}
 		}
 		count++;
