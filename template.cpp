@@ -18,7 +18,6 @@ std::string Template::getName() {
 
 std::string Template::generateTemplate() {
 	this->processTemplate();
-	std::cout << this->subject <<  std::endl;
     return this->subject;
 }
 void Template::processTemplate() {
