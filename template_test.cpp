@@ -38,4 +38,17 @@ TEST_CASE("Test Template Generate", "[templateGenerate]") {
 		
 		REQUIRE(tmp.generateTemplate().compare("a new sentence to test\nTest multi line with new item") == 0);   
 	}
+	SECTION("Three line case with 5 items") {
+		std::string subject = "a {{ item1 }} sentence {{ item2 }} test\nTest multi line with {{ item3 }}\n{{ item4 }} another line with {{ item5 }} items";
+	   
+		Template tmp = Template(subject);
+
+		tmp.setValue("item1", "new");
+		tmp.setValue("item2", "to");
+		tmp.setValue("item3", "new item");
+		tmp.setValue("item4", "Yet");
+		tmp.setValue("item5", "two");
+		
+		REQUIRE(tmp.generateTemplate().compare("a new sentence to test\nTest multi line with new item\nYet another line with two items") == 0);   
+	}
 };
